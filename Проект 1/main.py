@@ -19,6 +19,9 @@ def main():
     # Plot the data
     dplt.create_and_save_plot(stock_data, ticker, period)
 
+    print(f'Средняя цена закрытия акций за заданный период: {dd.calculate_and_display_average_price(stock_data)}')
+
+
 
 if __name__ == "__main__":
     main()
