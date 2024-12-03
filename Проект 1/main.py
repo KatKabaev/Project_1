@@ -21,6 +21,7 @@ def main():
 
     print(f'Средняя цена закрытия акций за заданный период: {dd.calculate_and_display_average_price(stock_data)}')
 
+    dd.notify_if_strong_fluctuations(stock_data, 5)
 
 
 if __name__ == "__main__":
