@@ -41,7 +41,7 @@
 - fetch_stock_data(ticker, period): Получает исторические данные об акциях для указанного тикера и временного периода. Возвращает DataFrame с данными.
 
 - add_moving_average(data, window_size): Добавляет в DataFrame колонку со скользящим средним, рассчитанным на основе цен закрытия.
-- 
+
 - calculate_and_display_average_price(data): Вычисляет и выводит среднюю цену закрытия акций за заданный период.
 <img src="https://github.com/KatKabaev/Project_1/blob/main/assets/1.png">
 
