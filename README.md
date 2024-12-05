@@ -48,7 +48,7 @@
 - notify_if_strong_fluctuations(data, threshold): Анализирует данные и уведомляет пользователя, если цена акций колебалась более чем на заданный процент за период.
 <img src="https://github.com/KatKabaev/Project_1/blob/main/assets/2.png">
 
-- export_data_to_csv
+- export_data_to_csv(data, filename): Позволяет сохранять загруженные данные об акциях в CSV файл.
 <img src="https://github.com/KatKabaev/Project_1/blob/main/assets/3.png">
 
 
