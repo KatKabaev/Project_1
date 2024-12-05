@@ -23,6 +23,8 @@ def main():
 
     dd.notify_if_strong_fluctuations(stock_data, 5)
 
+    dd.export_data_to_csv(stock_data, 'stock_data.csv')
+
 
 if __name__ == "__main__":
     main()

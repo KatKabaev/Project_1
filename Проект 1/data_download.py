@@ -33,7 +33,7 @@ def calculate_and_display_average_price(data):
 
 def notify_if_strong_fluctuations(data, threshold=10):
     '''
-    Анализирует данные и уведомляет пользователя, если цена акций колебалась более чем на заданный процент за период
+    Анализирует данные и уведомляет пользователя, если цена акций колебалась более чем на заданный процент за период.
     :param data: DataFrame с данными
     :param threshold: Заданный порог (по умолчанию 10%)
     :return: Уведомление о колебании цены закрытия акции
@@ -51,3 +51,13 @@ def notify_if_strong_fluctuations(data, threshold=10):
     else:
         print("Колебания в пределах нормы.")
         return False
+
+def export_data_to_csv(data, filename):
+    '''
+    Сохраняет DataFrame с данными об акциях в CSV файл.
+    :param data: DataFrame с данными
+    :param filename: Название для csv-файла
+    :return: Csv-файл с данными об акциях
+    '''
+    data.to_csv(filename, index=False)
+    print(f'Данные загружены в csv-файл "{filename}"')
