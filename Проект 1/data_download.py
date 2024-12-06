@@ -1,4 +1,6 @@
 import yfinance as yf
+import pandas_ta as pta
+import pandas as pd
 
 
 def fetch_stock_data(ticker, period='1mo'):
@@ -61,3 +63,13 @@ def export_data_to_csv(data, filename):
     '''
     data.to_csv(filename, index=False)
     print(f'Данные загружены в csv-файл "{filename}"')
+
+
+def calculate_rsi(data):
+    '''
+    Функции для расчёта и отображения на графике дополнительных технических индикаторов (RSI)
+    :param data: DataFrame с данными
+    :return: DataFrame с колонкой с RSI
+    '''
+    data['rsi'] = pta.rsi(data['Close'], 2)
+    return data

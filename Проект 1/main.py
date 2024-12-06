@@ -16,14 +16,17 @@ def main():
     # Add moving average to the data
     stock_data = dd.add_moving_average(stock_data)
 
-    # Plot the data
-    dplt.create_and_save_plot(stock_data, ticker, period)
-
     print(f'Средняя цена закрытия акций за заданный период: {dd.calculate_and_display_average_price(stock_data)}')
 
     dd.notify_if_strong_fluctuations(stock_data, 5)
 
-    dd.export_data_to_csv(stock_data, 'stock_data.csv')
+    dd.calculate_rsi(stock_data)
+
+
+    # dd.export_data_to_csv(stock_data, 'stock_data.csv')
+
+    # # Plot the data
+    dplt.create_and_save_plot(stock_data, ticker, period)
 
 
 if __name__ == "__main__":
