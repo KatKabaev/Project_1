@@ -52,7 +52,7 @@
 <img src="https://github.com/KatKabaev/Project_1/blob/main/assets/3.png">
 
 - calculate_rsi(data): Добавляет на графике дополнительные технические индикаторы (RSI)
-<img src="![aapl_1mo_stock_price_chart](https://github.com/user-attachments/assets/699eb4c1-aed1-4ffd-961c-b9572f54ff94)">
+<img src="https://github.com/KatKabaev/Project_1/blob/main/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%201/AAPL_1mo_stock_price_chart.png">
 
 <br>
 2. main.py:
