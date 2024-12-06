@@ -51,6 +51,8 @@
 - export_data_to_csv(data, filename): Позволяет сохранять загруженные данные об акциях в CSV файл.
 <img src="https://github.com/KatKabaev/Project_1/blob/main/assets/3.png">
 
+- calculate_rsi(data): Добавляет на графике дополнительные технические индикаторы (RSI)
+<img src="![aapl_1mo_stock_price_chart](https://github.com/user-attachments/assets/699eb4c1-aed1-4ffd-961c-b9572f54ff94)">
 
 <br>
 2. main.py:
