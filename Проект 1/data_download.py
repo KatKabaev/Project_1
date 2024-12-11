@@ -1,17 +1,29 @@
 import yfinance as yf
 import pandas_ta as pta
-import pandas as pd
 
 
-def fetch_stock_data(ticker, period='1mo'):
+def fetch_stock_data(ticker, period='1mo', start_date=None, end_date=None):
     '''
     :param ticker: тикер акции
+    :param start_date: начальная дата анализа
+    :param end_date: конечная дата анализа
     :param period: период акции
     :return: DataFrame с историческими данными об акциях для указанного тикера и временного периода
     '''
+
     stock = yf.Ticker(ticker)
-    data = stock.history(period=period)
-    return data
+
+    # Проверка на наличие либо периода, либо начальной и конечной дат
+    try:
+        if start_date is not None:
+            data = stock.history(period=period, start=start_date, end=end_date)
+        else:
+            data = stock.history(period=period)
+        return data
+
+    except ValueError:
+        return 'Необходимо указать либо период, либо начальную и конечную даты.'
+
 
 
 def add_moving_average(data, window_size=5):
@@ -41,8 +53,8 @@ def notify_if_strong_fluctuations(data, threshold=10):
     :return: Уведомление о колебании цены закрытия акции
     '''
 
-    max_value = max(data['Close'])
-    min_value = min(data['Close'])
+    max_value = data['Close'].max()
+    min_value = data['Close'].min()
 
     difference = max_value - min_value
     percentage_change = (difference / min_value) * 100
@@ -61,6 +73,7 @@ def export_data_to_csv(data, filename):
     :param filename: Название для csv-файла
     :return: Csv-файл с данными об акциях
     '''
+
     data.to_csv(filename, index=False)
     print(f'Данные загружены в csv-файл "{filename}"')
 
@@ -71,5 +84,6 @@ def calculate_rsi(data):
     :param data: DataFrame с данными
     :return: DataFrame с колонкой с RSI
     '''
+
     data['rsi'] = pta.rsi(data['Close'], 2)
     return data
