@@ -16,7 +16,7 @@ def fetch_stock_data(ticker, period='1mo', start_date=None, end_date=None):
     # Проверка на наличие либо периода, либо начальной и конечной дат
     try:
         if start_date is not None:
-            data = stock.history(period=period, start=start_date, end=end_date)
+            data = stock.history(start=start_date, end=end_date)
         else:
             data = stock.history(period=period)
         return data
