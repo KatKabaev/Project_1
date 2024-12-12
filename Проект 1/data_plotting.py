@@ -2,8 +2,23 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
-def create_and_save_plot(data, ticker, period=None, start_date=None, end_date=None, filename=None):
+def create_and_save_plot(data, ticker, period=None, start_date=None, end_date=None, style=None, filename=None):
+    """
+    Функция для создания и сохранения графика на основе данных о ценах акций.
+
+    :param data: DataFrame с данными
+    :param ticker: Тикер акции.
+    :param period: Период акции.
+    :param start_date: Начальная дата анализа.
+    :param end_date: Конечная дата анализа.
+    :param style: Стиль для оформления графика.
+    :param filename: Имя файла для сохранения графика.
+    :return: Создает и сохраняет график
+    """
+
     plt.figure(figsize=(10, 8))
+    if style is not None:
+        plt.style.use(style)
 
     if 'Date' not in data:
         if pd.api.types.is_datetime64_any_dtype(data.index):
