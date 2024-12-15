@@ -24,7 +24,7 @@ def main():
     stock_data = dd.add_moving_average(stock_data)
 
     # Display average price to the data
-    print(f'Средняя цена закрытия акций за заданный период: {dd.calculate_and_display_average_price(stock_data)}')
+    dd.calculate_average_price(stock_data)
 
     # Notify of strong fluctuations
     dd.notify_if_strong_fluctuations(stock_data, 5)
@@ -35,20 +35,23 @@ def main():
     # Create a csv-file with the selected data
     # dd.export_data_to_csv(stock_data, 'stock_data.csv')
 
+    # Display the standard deviation
+    std_deviation = dd.calculate_standard_deviation(stock_data)
+
     # Optionally select a style
     style = input("Можете выбрать стиль графика (например, 'ggplot', 'bmh', 'fivethirtyeight'), либо нажать Enter: ")
 
     # Plot the data
     if style:
         if period:
-            dplt.create_and_save_plot(stock_data, ticker, period, style=style)
+            dplt.create_and_save_plot(stock_data, ticker, std_deviation, period, style=style)
         else:
-            dplt.create_and_save_plot(stock_data, ticker, start_date=start_date, end_date=end_date, style=style)
+            dplt.create_and_save_plot(stock_data, ticker, std_deviation, start_date=start_date, end_date=end_date, style=style)
 
     elif period:
-        dplt.create_and_save_plot(stock_data, ticker, period)
+        dplt.create_and_save_plot(stock_data, ticker, std_deviation, period)
     else:
-        dplt.create_and_save_plot(stock_data, ticker, start_date=start_date, end_date=end_date)
+        dplt.create_and_save_plot(stock_data, ticker, std_deviation, start_date=start_date, end_date=end_date)
 
 
 if __name__ == "__main__":

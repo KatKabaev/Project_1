@@ -2,7 +2,7 @@ import yfinance as yf
 import pandas_ta as pta
 
 
-def fetch_stock_data(ticker, period='1mo', start_date=None, end_date=None):
+def fetch_stock_data(ticker, period, start_date=None, end_date=None):
     """
     Функция для получения исторических данных о ценах акций.
 
@@ -15,17 +15,11 @@ def fetch_stock_data(ticker, period='1mo', start_date=None, end_date=None):
 
     stock = yf.Ticker(ticker)
 
-    # Проверка на наличие либо периода, либо начальной и конечной дат
-    try:
-        if start_date is not None:
-            data = stock.history(start=start_date, end=end_date)
-        else:
-            data = stock.history(period=period)
-        return data
-
-    except ValueError:
-        return 'Необходимо указать либо период, либо начальную и конечную даты.'
-
+    if start_date is not None:
+        data = stock.history(start=start_date, end=end_date)
+    else:
+        data = stock.history(period=period)
+    return data
 
 
 def add_moving_average(data, window_size=5):
@@ -39,7 +33,7 @@ def add_moving_average(data, window_size=5):
     data['Moving_Average'] = data['Close'].rolling(window=window_size).mean()
     return data
 
-def calculate_and_display_average_price(data):
+def calculate_average_price(data):
     """
     Функция для расчёта средней цены закрытия акций.
 
@@ -47,6 +41,7 @@ def calculate_and_display_average_price(data):
     :return: Средняя цена закрытия акции.
     """
     average_price = round(data['Close'].mean(), 2)
+    print(f'Средняя цена закрытия акций за заданный период: {average_price}')
     return average_price
 
 def notify_if_strong_fluctuations(data, threshold=10):
@@ -92,5 +87,16 @@ def calculate_rsi(data):
     :return: DataFrame с колонкой с RSI.
     """
 
-    data['rsi'] = pta.rsi(data['Close'], 2)
+    data['RSI'] = pta.rsi(data['Close'], 2)
     return data
+
+def calculate_standard_deviation(data):
+    """
+    Функция для расчета стандартного отклонения цены закрытия акции.
+
+    :param data: DataFrame с данными.
+    :return: Стандартное отклонение цены закрытия акции.
+    """
+    std_deviation = data['Close'].std(ddof=1)
+    print(f'Стандартное отклонение цены закрытия: {round(std_deviation, 2)}')
+    return std_deviation
