@@ -53,6 +53,8 @@ def main():
     else:
         dplt.create_and_save_plot(stock_data, ticker, std_deviation, start_date=start_date, end_date=end_date)
 
+    # Interactive plot the data
+    dplt.show_interactive_plot(stock_data, ticker, std_deviation, period)
 
 if __name__ == "__main__":
     main()

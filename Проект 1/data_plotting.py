@@ -1,14 +1,16 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import matplotlib.dates as mdates
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
 
-def create_and_save_plot(data, ticker, std_deviation, period=None, start_date=None, end_date=None, style=None,
+def create_and_save_plot(data, ticker, std_deviation, period=None, start_date: str=None, end_date=None, style=None,
                          filename=None) -> None:
     """
     Функция для создания и сохранения графика на основе данных о ценах акций.
 
-    :param data: DataFrame с данными
+    :param data: DataFrame с данными.
     :param ticker: Тикер акции.
     :param std_deviation: Стандартное отклонение цены закрытия.
     :param period: Период акции.
@@ -16,7 +18,7 @@ def create_and_save_plot(data, ticker, std_deviation, period=None, start_date=No
     :param end_date: Конечная дата анализа.
     :param style: Стиль для оформления графика.
     :param filename: Имя файла для сохранения графика.
-    :return: Создает и сохраняет график
+    :return: Создает и сохраняет график.
     """
 
     plt.figure(figsize=(10, 8))
@@ -43,7 +45,10 @@ def create_and_save_plot(data, ticker, std_deviation, period=None, start_date=No
             ax1.set_ylabel("Цена")
             ax1.legend()
 
-            ax2.plot(dates, data['RSI'].values, label='RSI', color='g')
+            # График RSI
+            ax2.plot(dates, data['RSI'].values, label='RSI', color='b')
+            ax2.axhline(70, color='r', linestyle='--')
+            ax2.axhline(30, color='g', linestyle='--')
             ax2.set_title(f"RSI {ticker}")
             ax2.legend()
 
@@ -66,7 +71,6 @@ def create_and_save_plot(data, ticker, std_deviation, period=None, start_date=No
                              color='lightblue', alpha=0.5, label='Стандартное отклонение')
         plt.plot(data['Date'], data['RSI'], label='RSI')
 
-
     if filename is None:
         if period is None:
             filename = f"{ticker}_{start_date}_to_{end_date}_stock_price_chart.png"
@@ -74,4 +78,46 @@ def create_and_save_plot(data, ticker, std_deviation, period=None, start_date=No
             filename = f"{ticker}_{period}_stock_price_chart.png"
 
     plt.savefig(filename)
+    print(f"График сохранен как {filename}")
+
+def show_interactive_plot(data, ticker, std_deviation, period=None):
+    """
+    Функция для создания и сохранения интерактивного графика на основе данных о ценах акций.
+
+    :param data: DataFrame с данными.
+    :param ticker: Тикер акции.
+    :param std_deviation: Стандартное отклонение цены закрытия.
+    :param period: Период акции.
+    :return: Создает и сохраняет интерактивный график.
+    """
+    fig = make_subplots(rows=2, cols=1, subplot_titles=(
+        f"Цена акций {ticker}",
+        f"RSI {ticker}"
+        ))
+
+    fig.add_trace(go.Scatter(x=data.index, y=data['Close'], mode='lines', name='Цена закрытия'), row=1, col=1)
+    fig.add_trace(go.Scatter(x=data.index, y=data['Moving_Average'], mode='lines', name='Скользящее среднее'),
+                  row=1, col=1)
+    fig.add_trace(
+        go.Scatter(x=data.index, y=data['Close'] + std_deviation, mode='lines', name='Верхнее станд. откл.'), row=1, col=1)
+    fig.add_trace(
+        go.Scatter(x=data.index, y=data['Close'] - std_deviation, mode='lines', name='Нижнее станд. откл.',
+                   fill='tonexty'), row=1, col=1)
+
+    # График RSI
+    fig.add_trace(go.Scatter(x=data.index, y=data['RSI'], mode='lines', name='RSI'), row=2, col=1)
+    fig.add_hline(y=70, line_dash="dot", line_color="red", row=2, col=1)
+    fig.add_hline(y=30, line_dash="dot", line_color="green", row=2, col=1)
+
+    fig.update_xaxes(title_text="Дата", row=2, col=1)
+
+    filename = f"{ticker}_{period}_interactive_chart.html"
+
+    # Сохранение графика в HTML и открытие его в браузере
+    fig.write_html(filename)
+
+    # Открытие графика в браузере
+    fig.show()
+
+    # Вывод сообщения об успешном создании графика
     print(f"График сохранен как {filename}")
