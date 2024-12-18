@@ -61,6 +61,8 @@
 3. data_plotting.py:
 
 - create_and_save_plot(data, ticker, std_deviation, period, start_date, end_date, style, filename): Создаёт график, отображающий цены закрытия, скользящие средние, стандартное отклонение, RSI. Предоставляет возможность сохранения графика в файл. Параметр filename опционален; если он не указан, имя файла генерируется автоматически.
+  
+- show_interactive_plot(data, ticker, std_deviation): Создаёт такой же интерактивный график.
 
 
 
