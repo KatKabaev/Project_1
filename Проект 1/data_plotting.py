@@ -100,7 +100,8 @@ def show_interactive_plot(data, ticker, std_deviation, period=None):
     fig.add_trace(go.Scatter(x=data.index, y=data['Moving_Average'], mode='lines', name='Скользящее среднее'),
                   row=1, col=1)
     fig.add_trace(
-        go.Scatter(x=data.index, y=data['Close'] + std_deviation, mode='lines', name='Верхнее станд. откл.'), row=1, col=1)
+        go.Scatter(x=data.index, y=data['Close'] + std_deviation, mode='lines', name='Верхнее станд. откл.'), row=1, 
+                    col=1)
     fig.add_trace(
         go.Scatter(x=data.index, y=data['Close'] - std_deviation, mode='lines', name='Нижнее станд. откл.',
                    fill='tonexty'), row=1, col=1)
