@@ -6,7 +6,7 @@ from plotly.subplots import make_subplots
 
 
 def create_and_save_plot(data, ticker, std_deviation, period=None, start_date: str=None, end_date=None, style=None,
-                         filename=None) -> None:
+                         filename=None):
     """
     Функция для создания и сохранения графика на основе данных о ценах акций.
 
@@ -79,6 +79,7 @@ def create_and_save_plot(data, ticker, std_deviation, period=None, start_date: s
 
     plt.savefig(filename)
     print(f"График сохранен как {filename}")
+
 
 def show_interactive_plot(data, ticker, std_deviation, period=None):
     """
