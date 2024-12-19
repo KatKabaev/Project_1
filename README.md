@@ -79,4 +79,6 @@
 5. Программа обработает введённые данные, загрузит соответствующие данные об акциях, рассчитает скользящее среднее и отобразит график.
 
 <p align="center">
+<img src="https://github.com/KatKabaev/Project_1/blob/main/images/img1.png">
 <img src="https://github.com/KatKabaev/Project_1/blob/main/images/img2.png">
+
