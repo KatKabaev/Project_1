@@ -33,6 +33,7 @@ def add_moving_average(data, window_size=5):
     data['Moving_Average'] = data['Close'].rolling(window=window_size).mean()
     return data
 
+
 def calculate_average_price(data):
     """
     Функция для расчёта средней цены закрытия акций.
@@ -43,6 +44,7 @@ def calculate_average_price(data):
     average_price = round(data['Close'].mean(), 2)
     print(f'Средняя цена закрытия акций за заданный период: {average_price}')
     return average_price
+
 
 def notify_if_strong_fluctuations(data, threshold=10):
     """
@@ -65,6 +67,7 @@ def notify_if_strong_fluctuations(data, threshold=10):
     else:
         print("Колебания в пределах нормы.")
         return False
+
 
 def export_data_to_csv(data, filename):
     """
@@ -89,6 +92,7 @@ def calculate_rsi(data):
 
     data['RSI'] = pta.rsi(data['Close'], 2)
     return data
+
 
 def calculate_standard_deviation(data):
     """
